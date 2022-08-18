@@ -13,11 +13,11 @@ option(ENABLE_DOCTESTS "Include tests in the library. Setting this to OFF will r
 #                         Locate files (change as needed).
 # --------------------------------------------------------------------------------
 set(SOURCES          # All .cpp files in src/
-    ddes/sources/source/dice.cpp
-    ddes/sources/source/dnd.cpp
+    sources/source/dice.cpp
+    sources/source/dnd.cpp
 )
 set(TESTFILES        # All .cpp files in tests/
-    ddes/sources/source/main.cpp
+    sources/source/main.cpp
 )
 set(LIBRARY_NAME src)  # Default name for the library built from src/*.cpp (change if you wish)
 
