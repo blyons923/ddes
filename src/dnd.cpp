@@ -16,7 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "sources/header/dnd.h"
+#include "dnd.h"
 
 Monster::Monster() {
     // default constructor
