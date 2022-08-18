@@ -18,8 +18,8 @@
 
 #include "iostream"
 #include "string"
-#include "sources/header/dice.h"
-#include "sources/header/dnd.h"
+#include "dice.h"
+#include "dnd.h"
 
 int main() {
     std::string name = "Bowen", type = "Celestial";
