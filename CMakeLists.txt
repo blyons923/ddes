@@ -30,7 +30,7 @@ add_library(${LIBRARY_NAME} OBJECT ${SOURCES})
 # Lib needs its header files, and users of the library must also see these (PUBLIC). (No change needed)
 target_include_directories(${LIBRARY_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
-add_executable(main sources/source/main.cpp) 
+add_executable(main main/main.cpp) 
 target_link_libraries(main PRIVATE ${LIBRARY_NAME})  
 
 set_target_properties(
