@@ -46,6 +46,3 @@ set_target_properties(
         CXX_STANDARD_REQUIRED YES
         CXX_EXTENSIONS NO
 )
-
-# Set up tests (see tests/CMakeLists.txt).
-add_subdirectory(tests)
