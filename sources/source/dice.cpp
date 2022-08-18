@@ -16,7 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "sources/source/dice.h"
+#include "sources/header/dice.h"
 #include "ctime"
 #include "cstdlib"
 
