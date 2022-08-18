@@ -13,13 +13,13 @@ option(ENABLE_DOCTESTS "Include tests in the library. Setting this to OFF will r
 #                         Locate files (change as needed).
 # --------------------------------------------------------------------------------
 set(SOURCES          # All .cpp files in src/
-    sources/source/dice.cpp
-    sources/source/dnd.cpp
+    src/dice.cpp
+    src/dnd.cpp
 )
 set(TESTFILES        # All .cpp files in tests/
-    sources/source/main.cpp
+    main/main.cpp
 )
-set(LIBRARY_NAME src)  # Default name for the library built from src/*.cpp (change if you wish)
+set(LIBRARY_NAME engine)
 
 # --------------------------------------------------------------------------------
 #                            Build! (Change as needed)
@@ -30,15 +30,9 @@ add_library(${LIBRARY_NAME} OBJECT ${SOURCES})
 # Lib needs its header files, and users of the library must also see these (PUBLIC). (No change needed)
 target_include_directories(${LIBRARY_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
-# There's also (probably) doctests within the library, so we need to see this as well.
-target_link_libraries(${LIBRARY_NAME} PUBLIC doctest)
+add_executable(main sources/source/main.cpp) 
+target_link_libraries(main PRIVATE ${LIBRARY_NAME})  
 
-# Add an executable for the file app/main.cpp.
-# If you add more executables, copy these lines accordingly.
-add_executable(main sources/source/main.cpp)   # Name of exec. and location of file.
-target_link_libraries(main PRIVATE ${LIBRARY_NAME})  # Link the executable to library (if it uses it).
-
-# Set the properties you require, e.g. what C++ standard to use. Here applied to library and main (change as needed).
 set_target_properties(
     ${LIBRARY_NAME} main
       PROPERTIES
