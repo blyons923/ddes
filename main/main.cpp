@@ -24,11 +24,12 @@
 int main() {
     std::string name = "Bowen", type = "Celestial";
     char size = 'L';
-    int stats[] = {20,999,69,20,20,20,20,20,20,7,27,27,27,27,27,27,420};
+    int ac = 17, hp = 35, sp = 60, str = 17, dex = 10, con = 16, intl = 8, wis = 4, cha = 10, pm = 5, pp = 15;
+    bool prof[] = {0,0,0,0,0,0};
     bool dmg_res[] = {0,1,0,0,0,1,0,1,0,1,0,0,0,0};
     bool dmg_imu[] = {1,1,1,1,1,0,1,0,1,0,1,0,1,1};
     bool cnd_imu[] = {1,1,1,1,1,1,0,0,0,0,0,0,1,1,1};
-    Monster m = Monster(name,size,type,stats,dmg_res,dmg_imu,cnd_imu);
+    Monster m = Monster(name,size,type,ac,hp,sp,pp,str,dex,con,intl,wis,cha,pm,prof,dmg_res,dmg_imu,cnd_imu);
     m.display();
 
     return 0;

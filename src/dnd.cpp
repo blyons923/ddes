@@ -18,31 +18,68 @@
 
 #include "dnd.h"
 
+int getMod(int skill) {
+    if (skill == 1) {
+        return -5;
+    } else if (skill == 2 || skill == 3) {
+        return -4;
+    } else if (skill == 4 || skill == 5) {
+        return -3;
+    } else if (skill == 6 || skill == 7) {
+        return -2;
+    } else if (skill == 8 || skill == 9) {
+        return -1;
+    } else if (skill == 10 || skill == 11) {
+        return 0;
+    } else if (skill == 12 || skill == 13) {
+        return 1;
+    } else if (skill == 14 || skill == 15) {
+        return 2;
+    } else if (skill == 16 || skill == 17) {
+        return 3;
+    } else if (skill == 18 || skill == 19) {
+        return 4;
+    } else if (skill == 20 || skill == 21) {
+        return 5;
+    } else if (skill == 22 || skill == 23) {
+        return 6;
+    } else if (skill == 24 || skill == 25) {
+        return 7;
+    } else if (skill == 26 || skill == 27) {
+        return 8;
+    } else if (skill == 28 || skill == 29) {
+        return 9;
+    } else if (skill == 30) {
+        return 10;
+    }
+    // handle error
+    return -10;
+}
+
 Monster::Monster() {
     // default constructor
 }
 
-Monster::Monster(std::string _name, char _size, std::string _type, int _stats[17], bool _damage_resistances[14], bool _damage_immunities[14], bool _condition_immunities[15]) {
+Monster::Monster(std::string _name, char _size, std::string _type, int _armor_class, int _hit_points, int _speed, int _passive_per, int _str, int _dex, int _con, int _int,int _wis, int _cha, int _proficiency_mod, bool _proficiencies[6], bool _damage_resistances[14], bool _damage_immunities[14], bool _condition_immunities[15]) {
     name = _name;
     size = _size;
     type = _type;
-    armor_class = _stats[0];
-    hit_points = _stats[1];
-    speed = _stats[2];
-    strength = _stats[3];
-    dexterity = _stats[4];
-    constitution = _stats[5];
-    intelligence = _stats[6];
-    wisdom = _stats[7];
-    charisma = _stats[8];
-    proficiency_modifier = _stats[9];
-    str_save = _stats[10];
-    dex_save = _stats[11];
-    con_save = _stats[12];
-    int_save = _stats[13];
-    wis_save = _stats[14];
-    cha_save = _stats[15];
-    passive_perception = _stats[16];
+    armor_class = _armor_class;
+    hit_points = _hit_points;
+    speed = _speed;
+    passive_perception = _passive_per;
+    proficiency_mod = _proficiency_mod;
+    attribute_mod[0] = getMod(_str);
+    attribute_mod[1] = getMod(_dex);
+    attribute_mod[2] = getMod(_con);
+    attribute_mod[3] = getMod(_int);
+    attribute_mod[4] = getMod(_wis);
+    attribute_mod[5] = getMod(_cha);
+    for (int i = 0; i < 6; i++) {
+        if (_proficiencies[i]) {
+            attribute_mod[i] += proficiency_mod;
+        }
+    }
     for (int i = 0; i < 14; i++) {
         damage_resistances[i] = _damage_resistances[i];
     }
@@ -55,7 +92,7 @@ Monster::Monster(std::string _name, char _size, std::string _type, int _stats[17
 }
 
 void Monster::display() {
-    std::cout << "Monster: " << name << "\nSize: " << size << "\nType: " << type << "\nAC: " << armor_class << "\tHP: " << hit_points << "\tSpeed: " << speed << "ft\nSTR: " << strength << "\tDEX: " << dexterity << "\tCON: " << constitution << "\nINT: " << intelligence << "\tWIS: " << wisdom << "\tCHA: " << charisma << "\nSaving Throws: STR: " << str_save << " DEX: " << dex_save << " CON: " << con_save << " INT: " << int_save << " WIS: " << wis_save << " CHA: " << cha_save << "\nPassive Perception: " << passive_perception << "\nDamage Resistances: ";
+    std::cout << "Monster: " << name << "\nSize: " << size << "\nType: " << type << "\nAC: " << armor_class << "\tHP: " << hit_points << "\tSpeed: " << speed << "ft\nModifiers:\nSTR: " << attribute_mod[0] << "\tDEX: " << attribute_mod[1] << "\tCON: " << attribute_mod[2] << "\nINT: " << attribute_mod[3] << "\tWIS: " << attribute_mod[4] << "\tCHA: " << attribute_mod[5] << "\nPassive Perception: " << passive_perception << "\nDamage Resistances: ";
     int counter = 0;
     for (int i = 0; i < 14; i++) {
         if (damage_resistances[i]) {
@@ -89,5 +126,15 @@ void Monster::display() {
         std::cout << "none";
     else
         counter = 0;
-    std::cout << "\n";
+    std::cout << "\nProficiencies: ";
+    for (int i = 0; i < 6; i++) {
+        if (proficiencies[i]) {
+            std::cout << proficiencies_list[i] << " ";
+            counter++;
+        }
+    }
+    if (counter == 0)
+        std::cout << "none\n";
+    else
+        counter = 0;
 }
